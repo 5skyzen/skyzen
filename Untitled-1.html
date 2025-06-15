@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skyzen</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      font-family: sans-serif;
+      background: linear-gradient(to bottom, #0d1b2a, #1b263b);
+      overflow-x: hidden;
+    }
+    .sky {
+      min-height: 100vh;
+      position: relative;
+      padding-top: 140px;
+      text-align: center;
+    }
+    .top-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 15px 20px;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 6;
+    }
+    nav {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    nav a:hover {
+      color: #ffd700;
+    }
+    .logo {
+      position: absolute;
+      top: 80px;
+      left: 30px;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: #fff;
+      z-index: 3;
+    }
+    .moon {
+      position: absolute;
+      top: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: #f4f4f4;
+      box-shadow: 0 0 20px #fff;
+      z-index: 1;
+    }
+    .star {
+      position: absolute;
+      background: white;
+      width: 2px;
+      height: 2px;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: moveStars 10s linear infinite;
+    }
+    @keyframes moveStars {
+      0%   { transform: translateX(100vw); opacity: 1; }
+      100% { transform: translateX(-10vw); opacity: 0; }
+    }
+    .raindrop {
+      position: absolute;
+      width: 2px;
+      height: 10px;
+      background: rgba(255, 255, 255, 0.6);
+      top: -10px;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+    .content {
+      padding: 60px 20px 30px;
+      color: white;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 20px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .contact-form input, .contact-form textarea {
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+      font-size: 1rem;
+    }
+    .contact-form button {
+      padding: 10px;
+      background: #ffd700;
+      border: none;
+      font-weight: bold;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    footer {
+      background: linear-gradient(to bottom, #0d1b2a, #1b263b);
+      color: white;
+      text-align: center;
+      padding: 40px 10px;
+      position: relative;
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+  <div class="sky">
+    <div class="top-bar">
+      <div class="logo">Skyzen</div>
+      <nav>
+        <a href="#" onclick="showPage('home')">Home</a>
+        <a href="#" onclick="showPage('shopify')">Shopify Services</a>
+        <a href="#" onclick="showPage('leads')">Lead Generation</a>
+        <a href="#" onclick="showPage('contact')">Contact Us</a>
+        <a href="#" onclick="showPage('privacy')">Privacy Policy</a>
+        <a href="#" onclick="showPage('about')">About Us</a>
+      </nav>
+    </div>
+    <div class="moon"></div>
+    <div class="stars" id="stars"></div>
+    <div class="rain" id="rain"></div>
+
+    <div class="content" id="home">
+      <h1>🌟 Welcome to Skyzen!</h1>
+ <h1>Innovative. Reliable. Creative.</h1><br>
+    <p>we believe in the power of thoughtful work, clear communication, and on-time delivery.
+     Whether you’re starting something new or refining what you’ve built, Skyzen offers a peaceful,
+      dependable space where quality is never rushed and your vision always comes first.</p>
+    </div>
+
+    <div class="content" id="shopify" style="display: none;">
+      <h2>We offer Theme Customization, Product Uploads, Store Setup, and ongoing support tailored to
+         your brand's needs.</h2><br>
+    <P>At Skyzen, we transform your Shopify vision into a seamless, high-performing online store.
+        With attention to detail and a deep understanding of eCommerce trends, we offer smooth theme 
+        customization, intuitive product setup, and ongoing support. Every store we build 
+        is crafted to be user-friendly, brand-focused, and optimized for success always 
+        delivered with care, creativity, and on-time precision.</P>
+    </div>
+
+    <div class="content" id="leads" style="display: none;">
+      <h2>handpick and verify B2B We leads to help you connect with real potential customers and grow your
+         business.</h2><br>
+    <p>At Skyzen, our lead generation services go beyond just collecting data. we handpick and verify every
+         lead to ensure you're reaching real potential clients who matter to your business. With thoughtful
+          research and tailored targeting, we help you build genuine connections, boost conversions, and grow 
+          your brand with confidence and clarity.</p>
+    </div>
+
+    <div class="content" id="contact" style="display: none;">
+      <h2>Contact Us</h2>
+      <form class="contact-form" action="https://formspree.io/f/mvgrrwpj" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" rows="4" placeholder="Your Message" required></textarea>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+
+    <div class="content" id="privacy" style="display: none;">
+      <h2>Your information is secure and never shared without consent. All data 
+        is handled with strict confidentiality in compliance with
+         global data regulations.</h2><br>
+    <p>At Skyzen, your privacy is important to us. We are committed to safeguarding your personal information
+         and ensuring it is used responsibly. Any data you share through our website such as your name, email,
+          or message is kept strictly confidential and used only to respond to your inquiries or provide 
+          relevant services. We do not sell, trade, or share your information with third parties. Our website
+           is secured with modern protocols to protect your data, and we adhere to global data protection
+            standards to ensure your trust and peace of mind.</p>
+    </div>
+
+    <div class="content" id="about" style="display: none;">
+      <h2>Where Innovation Meets Global Trust.</h2><br>
+      <p>Skyzen is a globally-minded digital brand committed to delivering professional, on-time solutions with
+         a calm, creative touch. We collaborate with clients around the world, offering a seamless experience
+          built on trust, innovation, and a dedication to quality. Our mission is to make digital services
+          accessible, effective, and stress-free wherever you are.</p>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Skyzen | All Rights Reserved</p>
+    <p>Led by Atif Brothers, Co-CEOs of Skyzen</p>
+  </footer>
+
+  <script>
+    const starsContainer = document.getElementById('stars');
+    const rainContainer = document.getElementById('rain');
+
+    function generateStars(container) {
+      container.innerHTML = '';
+      for (let i = 0; i < 50; i++) {
+        const star = document.createElement('div');
+        star.classList.add('star');
+        star.style.top = Math.random() * 100 + 'vh';
+        star.style.left = Math.random() * 100 + 'vw';
+        star.style.animationDuration = (Math.random() * 5 + 5) + 's';
+        container.appendChild(star);
+      }
+    }
+
+    function generateRain(container) {
+      container.innerHTML = '';
+      for (let i = 0; i < 100; i++) {
+        const drop = document.createElement('div');
+        drop.classList.add('raindrop');
+        drop.style.left = Math.random() * 100 + 'vw';
+        drop.style.animationDuration = (Math.random() * 2 + 1) + 's';
+        drop.style.animationDelay = Math.random() * 2 + 's';
+        container.appendChild(drop);
+      }
+    }
+
+    function showPage(id) {
+      const sections = ['home', 'shopify', 'leads', 'contact', 'privacy', 'about'];
+      sections.forEach(sec => {
+        document.getElementById(sec).style.display = (sec === id) ? 'block' : 'none';
+      });
+    }
+
+    generateStars(starsContainer);
+    generateRain(rainContainer);
+  </script>
+</body>
+</html>
